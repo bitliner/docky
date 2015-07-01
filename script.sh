@@ -94,6 +94,7 @@ run_hub() {
 }
 
 usage() {
+        echo "USAGE: $0 <action>"
         echo "Actions:"
         echo "          run     build, stop and start all containers"
         echo "          build   build all containers"
