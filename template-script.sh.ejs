@@ -1,0 +1,114 @@
+#!/bin/bash
+
+SCRIPT_HOME="$( cd "$( dirname "$0" )" && pwd )"
+cd $SCRIPT_HOME
+
+<% images.forEach(function(image){%>
+
+build_<%= image.containerName %>() {
+        sudo docker build -t <%= image.name %> .
+}
+start_<%= image.containerName %>() {
+        sudo docker run --name <%= image.containerName %> \
+                -p <% if (image.ports.length) { %> <% image.ports.forEach(function(port){%> <%= port%> <% }) %><% }else{%>''<%} %> \
+                -e <% if (image.environment.length) { %> <% image.environment.forEach(function(env){%> <%= env%> <% }) %><% }else{%>''<%} %> \
+                -d <%= image.name %> 
+}
+
+stop_<%= image.containerName %>() {
+        sudo docker stop <%= image.containerName %>
+        sudo docker rm <%= image.containerName %>
+}
+<% }); %>
+<% images.forEach(function(image){%>
+run_<%= image.containerName %>() {
+        build_<%= image.containerName %>
+        stop_<%= image.containerName %>
+        start_<%= image.containerName %>
+}
+<%})%>
+
+
+stop() {
+<% images.forEach(function(image){%>
+        stop_<%= image.containerName %>
+<%})%>
+}
+start() {
+<% images.forEach(function(image){%>
+        start_<%= image.containerName %>
+<%})%>
+
+}
+build() {
+<% images.forEach(function(image){%>
+        build_<%= image.containerName %>
+<%})%>
+}
+
+
+
+
+run() {
+        build
+        stop
+        start
+}
+run_test() {
+        build
+        stop_test
+        start_test
+        show_logs
+}
+run_hub() {
+        stop
+        start_hub
+}
+
+usage() {
+        echo "Actions:"
+        echo "          run     build, stop and start all containers"
+        echo "          build   build all containers"
+        echo "          start  start all containers"
+        echo "          stop    stop containers"
+        echo ""
+        echo ""
+        
+        <% images.forEach(function(image){%>
+        echo "          ---> '<%= image.containerName %>' container"
+        echo ""
+        echo "          run_<%= image.containerName %>   build, stop and start '<%= image.containerName %>' container"
+        echo "          build_<%= image.containerName %> build '<%= image.containerName %>' container"
+        echo "          start_<%= image.containerName %> start '<%= image.containerName %>' container"
+        echo "          stop_<%= image.containerName %>  stop '<%= image.containerName %>' container"
+        echo ""        
+        <%})%>
+}
+
+
+case $1 in
+        run)
+                run;;
+        hub)
+                run_hub;;
+        test)
+                run_test;;
+        build)
+                build;;
+        start)
+                start;;
+        start_hub)
+                start_hub;;
+        start_test)
+                start_test;;
+        stop)
+                stop;;
+        stop_hub)
+                stop_hub;;
+        stop_test)
+                stop_test;;
+        *)
+                usage
+                exit 1
+        ;;
+esac

@@ -1,0 +1,16 @@
+browserNode:
+  image: selenium/standalone-firefox:2.46.0
+  ports:
+    - 4443:4444
+browserServer:
+  image: bitliner/browser-server
+  ports:
+    - 9091:9091
+    - 9092:9092
+  environment:
+    - CHROME_REMOTE_URL=http://172.17.42.1:4443/wd/hub 
+    - CONSUMER_IP=* 
+    - CONSUMER_PORT=9091 
+    - PRODUCER_IP=* 
+    - PRODUCER_PORT=9092 
+    - BROWSER_NAME=FIREFOX
