@@ -50,6 +50,8 @@ npm install -g docky
 
 ## Commands
 
+### Commands to manage all container at once
+
 ```sh
 $ ./docky run # run all containers
 ```
@@ -69,6 +71,28 @@ $ ./docky push # push all images
 $ ./docky pull # pull all images
 ```
 
+### Commands to manage a single container 
+
+Just add `_<container_name>` to the commands above to manage all containers at once.
+
+```sh
+$ ./docky run_<container_name> # run <container_name> container
+```
+```sh
+$ ./docky start_<container_name> # start <container_name> container
+```
+```sh
+$ ./docky stop_<container_name> # stop <container_name> container
+```
+```sh
+$ ./docky build_<image_name> # build <image_name> image
+```
+```sh
+$ ./docky push_<image_name> # push <image_name> image
+```
+```sh
+$ ./docky pull # pull all images
+```
 
 
 
