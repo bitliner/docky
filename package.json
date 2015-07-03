@@ -1,8 +1,9 @@
 {
-  "name": "@bitliner/docker-script-generator",
+  "name": "@bitliner/docky",
   "version": "1.0.0",
   "description": "",
-  "main": "docker-script-generator.js",
+  "main": "docky.js",
+  "bin":"docky.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
