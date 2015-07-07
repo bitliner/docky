@@ -29,13 +29,13 @@ run_<%= image.containerName %>() {
 <%})%>
 
 <% images.forEach(function(image){%>
-push_<%= image.containerName %>() {
-        sudo docker push <%= image.containerName %>
+push_<%= image.imageName %>() {
+        sudo docker push <%= image.imageName %>
 }
 <%})%>
 <% images.forEach(function(image){%>
-pull_<%= image.containerName %>() {
-        sudo docker pull <%= image.containerName %>
+pull_<%= image.imageName %>() {
+        sudo docker pull <%= image.imageName %>
 }
 <%})%>
 
