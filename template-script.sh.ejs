@@ -28,6 +28,17 @@ run_<%= image.containerName %>() {
 }
 <%})%>
 
+<% images.forEach(function(image){%>
+push_<%= image.containerName %>() {
+        sudo docker push <%= image.containerName %>
+}
+<%})%>
+<% images.forEach(function(image){%>
+pull_<%= image.containerName %>() {
+        sudo docker pull <%= image.containerName %>
+}
+<%})%>
+
 
 stop() {
 <% images.forEach(function(image){%>
@@ -45,6 +56,11 @@ build() {
         build_<%= image.containerName %>
 <%})%>
 }
+push() {
+<% images.forEach(function(image){%>
+        push_<%= image.containerName %>
+<%})%>
+}
 
 
 
@@ -54,16 +70,6 @@ run() {
         stop
         start
 }
-run_test() {
-        build
-        stop_test
-        start_test
-        show_logs
-}
-run_hub() {
-        stop
-        start_hub
-}
 
 usage() {
         echo "USAGE: $0 <action>"
@@ -72,6 +78,8 @@ usage() {
         echo "          build   build all containers"
         echo "          start  start all containers"
         echo "          stop    stop containers"
+        echo "          push    push containers"
+        echo "          pull    pull containers"
         echo ""
         echo ""
         
@@ -82,6 +90,8 @@ usage() {
         echo "          build_<%= image.containerName %> build '<%= image.containerName %>' container"
         echo "          start_<%= image.containerName %> start '<%= image.containerName %>' container"
         echo "          stop_<%= image.containerName %>  stop '<%= image.containerName %>' container"
+        echo "          push_<%= image.containerName %>  push '<%= image.containerName %>' container"
+        echo "          pull_<%= image.containerName %>  pull '<%= image.containerName %>' container"
         echo ""        
         <%})%>
 }
@@ -90,14 +100,14 @@ usage() {
 case $1 in
         run)
                 run;;
-        hub)
-                run_hub;;
-        test)
-                run_test;;
         build)
                 build;;
         start)
                 start;;
+        push)
+                push;;
+        pull)
+                pull;;
         start_hub)
                 start_hub;;
         start_test)

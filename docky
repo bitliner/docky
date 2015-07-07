@@ -1,5 +1,6 @@
+#!/usr/bin/env node
 /* jshint node:true */
-'use strict';
+'use strict;'
 
 var YamlParser = require('yamljs'),
 	ejs = require('ejs');
