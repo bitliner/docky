@@ -70,7 +70,9 @@ start() {
 }
 build() {
 <% images.forEach(function(image){%>
+        <% if (image.build){ %>
         build_<%= image.containerName %>
+        <% } %>
 <%})%>
 }
 push() {
