@@ -17,7 +17,7 @@ start_<%= image.containerName %>() {
 <% } else if (image.name){%>
 
 start_<%= image.containerName %>() {
-        sudo docker run --name <%= image.containerName %> <%= helpers.ports(image) %> <%= helpers.env(image) %> <%= helpers.volumes(image) %> -d <%= image.name %>  <%= helpers.cmd(img) %>
+        sudo docker run --name <%= image.containerName %> <%= helpers.ports(image) %> <%= helpers.env(image) %> <%= helpers.volumes(image) %> -d <%= image.name %>  <%= helpers.cmd(image) %>
 }
         
 <% } %>
