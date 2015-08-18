@@ -40,7 +40,8 @@ Object.keys(containerName2conf).forEach(function(containerName) {
 		ports: containerConfiguration.ports || [],
 		environment: containerConfiguration.environment || [],
 		volumes: containerConfiguration.volumes || [],
-		command: containerConfiguration.command || null
+		command: containerConfiguration.command || null,
+		build: containerConfiguration.build || null
 	};
 
 	image.volumes = image.volumes.map(function(vol) {
