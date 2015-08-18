@@ -36,7 +36,7 @@ Object.keys(containerName2conf).forEach(function(containerName) {
 
 	image = {
 		containerName: containerName,
-		name: containerConfiguration.image,
+		name: containerConfiguration.image || null,
 		ports: containerConfiguration.ports || [],
 		environment: containerConfiguration.environment || [],
 		volumes: containerConfiguration.volumes || [],
