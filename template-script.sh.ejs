@@ -75,14 +75,7 @@ run() {
 usage() {
         echo "USAGE: $0 <action>"
         echo "Actions:"
-        echo "          run     build, stop and start all containers"
-        echo "          build   build all containers"
-        echo "          start  start all containers"
-        echo "          stop    stop containers"
-        echo "          push    push containers"
-        echo "          pull    pull containers"
-        echo ""
-        echo ""
+        echo "###########       MANAGE A SINGLE CONTAINERS      ###########"
         
         <% images.forEach(function(image){%>
         echo "          ---> '<%= image.containerName %>' container"
@@ -95,6 +88,16 @@ usage() {
         echo "          pull_<%= image.containerName %>  pull '<%= image.containerName %>' container"
         echo ""        
         <%})%>
+        
+        echo "###########       MANAGE ALL CONTAINERS AT ONCE   ###########"
+        echo "          run     build, stop and start all containers"
+        echo "          build   build all containers"
+        echo "          start   start all containers"
+        echo "          stop    stop containers"
+        echo "          push    push containers"
+        echo "          pull    pull containers"
+        echo ""
+        echo ""
 }
 
 
