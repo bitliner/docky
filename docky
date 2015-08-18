@@ -71,4 +71,4 @@ var filename = require('path').resolve('./', outputScriptName);
 fs.writeFileSync(filename, output, {
 	encoding: 'utf8'
 });
-fs.chmodSync(filename, '+x');
+fs.chmodSync(filename, '700');
