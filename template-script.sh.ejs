@@ -10,8 +10,9 @@ build_<%= image.containerName %>() {
 }
 start_<%= image.containerName %>() {
         sudo docker run --name <%= image.containerName %> \
-                -p <% if (image.ports.length) { %> <% image.ports.forEach(function(port){%> <%= port%> <% }) %><% }else{%>''<%} %> \
-                -e <% if (image.environment.length) { %> <% image.environment.forEach(function(env){%> <%= env%> <% }) %><% }else{%>''<%} %> \
+                <% if (image.ports.length) { %> <% image.ports.forEach(function(port){%> -p <%= port%> <% }) %><% }else{%>''<%} %> \
+                <% if (image.environment.length) { %> <% image.environment.forEach(function(env){%> -e <%= env%> <% }) %><% }else{%>''<%} %> \
+                <% if (image.volumes.length) { %> <% image.volumes.forEach(function(vol){%> -v <%= vol%> <% }) %><% }else{%>''<%} %> \
                 -d <%= image.name %> 
 }
 
@@ -30,12 +31,12 @@ run_<%= image.containerName %>() {
 
 <% images.forEach(function(image){%>
 push_<%= image.containerName %>() {
-        sudo docker push <%= image.imageName %>
+        sudo docker push <%= image.name %>
 }
 <%})%>
 <% images.forEach(function(image){%>
 pull_<%= image.containerName %>() {
-        sudo docker pull <%= image.imageName %>
+        sudo docker pull <%= image.name %>
 }
 <%})%>
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+
 /* jshint node:true */
-'use strict;'
+'use strict';
 
 var YamlParser = require('yamljs'),
 	ejs = require('ejs');
@@ -37,8 +38,21 @@ Object.keys(containerName2conf).forEach(function(containerName) {
 		containerName: containerName,
 		name: containerConfiguration.image,
 		ports: containerConfiguration.ports || [],
-		environment: containerConfiguration.environment || []
+		environment: containerConfiguration.environment || [],
+		volumes: containerConfiguration.volumes || [],
+		command: containerConfiguration.command || null
 	};
+
+	image.volumes = image.volumes.map(function(vol) {
+		var left, right, splitted;
+
+		splitted = vol.split(/:/gi);
+		left = splitted[0];
+		right = splitted[1];
+
+		return '$(pwd)/' + left + ':' + right;
+
+	});
 
 	images.push(image);
 
@@ -52,6 +66,9 @@ output = ejs.render(template, {
 });
 // console.log(output);
 // write to file
-require('fs').writeFileSync(require('path').resolve('./', outputScriptName), output, {
+var fs = require('fs');
+var filename = require('path').resolve('./', outputScriptName);
+fs.writeFileSync(filename, output, {
 	encoding: 'utf8'
 });
+fs.chmodSync(filename, '+x');
