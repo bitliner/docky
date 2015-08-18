@@ -11,21 +11,13 @@ build_<%= image.containerName %>() {
         sudo docker build -t <%= image.containerName %> .
 }
 start_<%= image.containerName %>() {
-        sudo docker run --name <%= image.containerName %> \
-                <% if (image.ports.length) { %> <% image.ports.forEach(function(port){%> -p <%= port%> <% }) %><% }else{%>''<%} %> \
-                <% if (image.environment.length) { %> <% image.environment.forEach(function(env){%> -e <%= env%> <% }) %><% }else{%>''<%} %> \
-                <% if (image.volumes.length) { %> <% image.volumes.forEach(function(vol){%> -v <%= vol%> <% }) %><% }else{%>''<%} %> \
-                -d <%= image.containerName %>  <% if (image.command){%> <%= image.command %> <% } %>
+        sudo docker run --name <%= image.containerName %> <%= ports(image) %> <%= env(image) %> <%= volumes(image) %> -d <%= image.containerName %>  <%= cmd(img) %>
 }
   
 <% } else if (image.name){%>
 
 start_<%= image.containerName %>() {
-        sudo docker run --name <%= image.containerName %> \
-                <% if (image.ports.length) { %> <% image.ports.forEach(function(port){%> -p <%= port%> <% }) %><% }else{%>''<%} %> \
-                <% if (image.environment.length) { %> <% image.environment.forEach(function(env){%> -e <%= env%> <% }) %><% }else{%>''<%} %> \
-                <% if (image.volumes.length) { %> <% image.volumes.forEach(function(vol){%> -v <%= vol%> <% }) %><% }else{%>''<%} %> \
-                -d <%= image.name %>  <% if (image.command){%> <%= image.command %> <% } %>
+        sudo docker run --name <%= image.containerName %> <%= ports(image) %> <%= env(image) %> <%= volumes(image) %> -d <%= image.name %>  <%= cmd(img) %>
 }
         
 <% } %>

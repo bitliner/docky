@@ -61,9 +61,42 @@ Object.keys(containerName2conf).forEach(function(containerName) {
 
 var output;
 
+var helpers = {
+	ports: function(image) {
+		if (image.ports.length) {
+			return image.ports.map(function(port) {
+				return ' -p ' + port;
+			}).join('');
+		}
+		return '';
+	},
+	env: function(image) {
+		if (image.environment.length) {
+			return image.environment.map(function(env) {
+				return ' -e  ' + env;
+			}).join(' ');
+		}
+		return '';
+	},
+	volumes: function(image) {
+		if (image.volumes.length) {
+			return image.volumes.map(function(vol) {
+				return ' -v ' + vol;
+			}).join(' ');
+		}
+	},
+	cmd: function(image) {
+		if (image.command) {
+			return image.command;
+		}
+		return '';
+	}
+};
+
 // render template
 output = ejs.render(template, {
-	images: images
+	images: images,
+	helpers: helpers
 });
 // console.log(output);
 // write to file
