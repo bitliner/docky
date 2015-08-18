@@ -13,7 +13,7 @@ start_<%= image.containerName %>() {
                 <% if (image.ports.length) { %> <% image.ports.forEach(function(port){%> -p <%= port%> <% }) %><% }else{%>''<%} %> \
                 <% if (image.environment.length) { %> <% image.environment.forEach(function(env){%> -e <%= env%> <% }) %><% }else{%>''<%} %> \
                 <% if (image.volumes.length) { %> <% image.volumes.forEach(function(vol){%> -v <%= vol%> <% }) %><% }else{%>''<%} %> \
-                -d <%= image.name %> 
+                -d <%= image.name %>  <% if (image.command){%> <%= image.command %> <% } %>
 }
 
 stop_<%= image.containerName %>() {
@@ -88,7 +88,7 @@ usage() {
         echo "          pull_<%= image.containerName %>  pull '<%= image.containerName %>' container"
         echo ""        
         <%})%>
-        
+
         echo "###########       MANAGE ALL CONTAINERS AT ONCE   ###########"
         echo "          run     build, stop and start all containers"
         echo "          build   build all containers"
