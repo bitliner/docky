@@ -11,13 +11,13 @@ build_<%= image.containerName %>() {
         sudo docker build -t <%= image.containerName %> .
 }
 start_<%= image.containerName %>() {
-        sudo docker run --name <%= image.containerName %> <%= helpers.ports(image) %> <%= helpers.env(image) %> <%= helpers.volumes(image) %> -d <%= image.containerName %>  <%= helpers.cmd(image) %>
+        sudo docker run --name <%= image.containerName %> <%= helpers.ports(image) %> <%= helpers.links(image) %> <%= helpers.env(image) %> <%= helpers.volumes(image) %> -d <%= image.containerName %>  <%- helpers.cmd(image) %>
 }
   
 <% } else if (image.name){%>
 
 start_<%= image.containerName %>() {
-        sudo docker run --name <%= image.containerName %> <%= helpers.ports(image) %> <%= helpers.env(image) %> <%= helpers.volumes(image) %> -d <%= image.name %>  <%= helpers.cmd(image) %>
+        sudo docker run --name <%= image.containerName %> <%= helpers.ports(image) %> <%= helpers.links(image) %> <%= helpers.env(image) %> <%= helpers.volumes(image) %> -d <%= image.name %>  <%- helpers.cmd(image) %>
 }
         
 <% } %>

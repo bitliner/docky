@@ -41,7 +41,8 @@ Object.keys(containerName2conf).forEach(function(containerName) {
 		environment: containerConfiguration.environment || [],
 		volumes: containerConfiguration.volumes || [],
 		command: containerConfiguration.command || null,
-		build: containerConfiguration.build || null
+		build: containerConfiguration.build || null,
+		links: containerConfiguration.links || null
 	};
 
 	image.volumes = image.volumes.map(function(vol) {
@@ -88,6 +89,14 @@ var helpers = {
 	cmd: function(image) {
 		if (image.command) {
 			return image.command;
+		}
+		return '';
+	},
+	links: function(image) {
+		if (image.links) {
+			return image.links.map(function(link) {
+				return ' --link ' + link;
+			}).join(' ');
 		}
 		return '';
 	}
