@@ -4,7 +4,15 @@
 'use strict';
 
 var YamlParser = require('yamljs'),
-	ejs = require('ejs');
+	ejs = require('ejs'),
+	pkg = require('./package.json');
+var program = require('commander');
+program.version(pkg.version)
+	.option('-n, --no-cache', 'Add --no-chace option to each build task')
+	.parse(process.argv);
+console.log(program, program.noCache);
+return;
+
 
 var yamlInputFilepath,
 	outputScriptName;
@@ -18,6 +26,8 @@ if (!yamlInputFilepath || yamlInputFilepath === '' || yamlInputFilepath.indexOf(
 
 outputScriptName = yamlInputFilepath.split('.yml')[0] + '.sh';
 yamlInputFilepath = require('path').resolve('./', yamlInputFilepath);
+
+
 
 // parse yaml file
 var containerName2conf = YamlParser.load(yamlInputFilepath);
