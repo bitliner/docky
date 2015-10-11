@@ -47,6 +47,11 @@ pull_<%= image.containerName %>() {
         sudo docker pull <%= image.name %>
 }
 <%})%>
+pull() {
+<% images.forEach(function(image){%>
+        sudo docker pull <%= image.name %>
+<%})%>
+}
 
 
 stop() {
