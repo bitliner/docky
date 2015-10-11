@@ -13,7 +13,7 @@ addTab() {
 
 build_<%= image.containerName %>() {
         echo ">>> build_<%= image.containerName %>"
-        sudo docker build -t <%= image.containerName %> .
+        sudo docker build -t <%= image.containerName %>:latest .
 }
 start_<%= image.containerName %>() {
         echo ">>> start_<%= image.containerName %>"
