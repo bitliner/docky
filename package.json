@@ -1,6 +1,6 @@
 {
   "name": "@bitliner/docky",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "",
   "main": "docky.js",
   "bin": {
