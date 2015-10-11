@@ -49,7 +49,7 @@ pull_<%= image.containerName %>() {
 <%})%>
 pull() {
 <% images.forEach(function(image){%>
-        <%= if (!image.build) { %>sudo docker pull <%= image.name %> <% } %>
+        <% if (!image.build) { %>sudo docker pull <%= image.name %> <% } %>
 <%})%>
 }
 
