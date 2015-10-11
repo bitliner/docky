@@ -40,28 +40,28 @@ stop_<%= image.containerName %>() {
 <% images.forEach(function(image){%>
 run_<%= image.containerName %>() {
         echo "Running run_<%= image.containerName %>"
-        build_<%= image.containerName %>
-        stop_<%= image.containerName %>
-        start_<%= image.containerName %>
+        build_<%= image.containerName %> | addTab
+        stop_<%= image.containerName %> | addTab
+        start_<%= image.containerName %> | addTab
 }
 <%})%>
 
 <% images.forEach(function(image){%>
 push_<%= image.containerName %>() {
         echo ">>> Running push_<%= image.containerName %>"
-        sudo docker push <%= image.name %>
+        sudo docker push <%= image.name %> | addTab
 }
 <%})%>
 <% images.forEach(function(image){%>
 pull_<%= image.containerName %>() {
         echo ">>> Running pull_<%= image.containerName %>"
-        sudo docker pull <%= image.name %>
+        sudo docker pull <%= image.name %> | addTab
 }
 <%})%>
 pull() {
         echo ">>> Running pull"
 <% images.forEach(function(image){%>
-        <% if (!image.build) { %>sudo docker pull <%= image.name %> <% } %>
+        <% if (!image.build) { %>sudo docker pull <%= image.name %> | addTab <% } %>
 <%})%>
 }
 
@@ -69,13 +69,13 @@ pull() {
 stop() {
         echo ">>> Running stop"
 <% images.forEach(function(image){%>
-        stop_<%= image.containerName %>
+        stop_<%= image.containerName %> | addTab
 <%})%>
 }
 start() {
         echo ">>> Running start"
 <% images.forEach(function(image){%>
-        start_<%= image.containerName %>
+        start_<%= image.containerName %> | addTab
 <%})%>
 
 }
@@ -83,14 +83,14 @@ build() {
         echo ">>> Running build"
 <% images.forEach(function(image){%>
         <% if (image.build){ %>
-        build_<%= image.containerName %>
+        build_<%= image.containerName %>| addTab
         <% } %>
 <%})%>
 }
 push() {
         echo ">>> Running push"
 <% images.forEach(function(image){%>
-        push_<%= image.containerName %>
+        push_<%= image.containerName %> | addTab
 <%})%>
 }
 
