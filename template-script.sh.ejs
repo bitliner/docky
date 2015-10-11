@@ -3,6 +3,10 @@
 SCRIPT_HOME="$( cd "$( dirname "$0" )" && pwd )"
 cd $SCRIPT_HOME
 
+addTab() {
+        sed 's/^/       /'
+} 
+
 <% images.forEach(function(image){%>
 
 <% if (image.build){ %>
@@ -95,10 +99,10 @@ push() {
 
 run() {
         echo ">>> Running run"
-        pull
-        build
-        stop
-        start
+        pull|addTab
+        build|addTab
+        stop|addTab
+        start|addTab
 }
 
 usage() {
