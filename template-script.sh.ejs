@@ -5,6 +5,7 @@ cd $SCRIPT_HOME
 
 addTab() {
         sed 's/^/>> /'|sed 's/> >/>>/' 
+        # |awk '{r=gensub(/>([A-z])/," \\1",$0); print r;}'
 } 
 
 <% images.forEach(function(image){%>
