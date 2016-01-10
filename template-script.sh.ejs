@@ -147,11 +147,14 @@ case $1 in
         pull)
                 pull;;
         stop)
-                stop;;
-<% images.forEach(function(image){%>
-        run_<%= image.containerName %>)
-                run_<%= image.containerName %>);;
-<% } %>
+                stop;;  <% images.forEach(function(image){ %>
+        run_<%= image.containerName %>) 
+                run_<%= image.containerName %>;; 
+        stop_<%= image.containerName %>) 
+                stop_<%= image.containerName %>;; 
+        build_<%= image.containerName %>) 
+                build_<%= image.containerName %>;; <% }); %>
+
         *)
                 usage
                 exit 1
