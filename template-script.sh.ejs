@@ -146,16 +146,12 @@ case $1 in
                 push;;
         pull)
                 pull;;
-        start_hub)
-                start_hub;;
-        start_test)
-                start_test;;
         stop)
                 stop;;
-        stop_hub)
-                stop_hub;;
-        stop_test)
-                stop_test;;
+<% images.forEach(function(image){%>
+        run_<%= image.containerName %>)
+                run_<%= image.containerName %>);;
+<% } %>
         *)
                 usage
                 exit 1
