@@ -14,18 +14,18 @@ addTab() {
 
 build_<%= image.containerName %>() {
         echo "build_<%= image.containerName %>"
-        sudo docker build -t <%= image.containerName %>:latest .
+        docker build -t <%= image.containerName %>:latest .
 }
 start_<%= image.containerName %>() {
         echo "start_<%= image.containerName %>"
-        sudo docker run --name <%= image.containerName %> <%= helpers.ports(image) %> <%= helpers.links(image) %> <%= helpers.env(image) %> <%= helpers.volumes(image) %> -d <%= image.containerName %>  <%- helpers.cmd(image) %>
+        docker run --name <%= image.containerName %> <%= helpers.ports(image) %> <%= helpers.links(image) %> <%= helpers.env(image) %> <%= helpers.volumes(image) %> -d <%= image.containerName %>  <%- helpers.cmd(image) %>
 }
   
 <% } else if (image.name){%>
 
 start_<%= image.containerName %>() {
         echo "start_<%= image.containerName %>"
-        sudo docker run --name <%= image.containerName %> <%= helpers.ports(image) %> <%= helpers.links(image) %> <%= helpers.env(image) %> <%= helpers.volumes(image) %> -d <%= image.name %>  <%- helpers.cmd(image) %>
+        docker run --name <%= image.containerName %> <%= helpers.ports(image) %> <%= helpers.links(image) %> <%= helpers.env(image) %> <%= helpers.volumes(image) %> -d <%= image.name %>  <%- helpers.cmd(image) %>
 }
         
 <% } %>
@@ -34,8 +34,8 @@ start_<%= image.containerName %>() {
 
 stop_<%= image.containerName %>() {
         echo "Running stop_<%= image.containerName %>"
-        sudo docker stop <%= image.containerName %>
-        sudo docker rm <%= image.containerName %>
+        docker stop <%= image.containerName %>
+        docker rm <%= image.containerName %>
 }
 <% }); %>
 <% images.forEach(function(image){%>
@@ -50,19 +50,19 @@ run_<%= image.containerName %>() {
 <% images.forEach(function(image){%>
 push_<%= image.containerName %>() {
         echo "Running push_<%= image.containerName %>"
-        sudo docker push <%= image.name %> | addTab
+        docker push <%= image.name %> | addTab
 }
 <%})%>
 <% images.forEach(function(image){%>
 pull_<%= image.containerName %>() {
         echo "Running pull_<%= image.containerName %>"
-        sudo docker pull <%= image.name %> | addTab
+        docker pull <%= image.name %> | addTab
 }
 <%})%>
 pull() {
         echo "Running pull"
 <% images.forEach(function(image){%>
-        <% if (!image.build) { %>sudo docker pull <%= image.name %> | addTab <% } %>
+        <% if (!image.build) { %>docker pull <%= image.name %> | addTab <% } %>
 <%})%>
 }
 
