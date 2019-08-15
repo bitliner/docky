@@ -1,3 +1,5 @@
+# This package is deprecated and outdated
+
 # Docky - Toolkit for Docker
 
 Docky generates **bash** scripts to manage multiple Docker containers.
